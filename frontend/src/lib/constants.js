@@ -22,7 +22,7 @@ export const APP = {
  */
 
 export const API = {
-    BASE_URL: "http://localhost:3000",
+    BASE_URL: "https://santri-app-production.up.railway.app",
 
     AUTH: {
         LOGIN: "/auth/login",

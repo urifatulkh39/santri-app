@@ -1,5 +1,3 @@
-// src/lib/api.js
-
 import axios from "axios";
 
 /**
@@ -9,7 +7,7 @@ import axios from "axios";
  */
 
 const api = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://santri-app-production.up.railway.app",
     timeout: 10000,
     headers: {
         "Content-Type": "application/json",
@@ -24,17 +22,8 @@ const api = axios.create({
  */
 
 api.interceptors.request.use(
-    (config) => {
-        // Future:
-        // JWT Token
-        // Authorization Header
-        // Loading Global
-
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (config) => config,
+    (error) => Promise.reject(error)
 );
 
 /**
@@ -46,20 +35,26 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
+
         if (error.response) {
+
             console.error(
                 `[API ${error.response.status}]`,
                 error.response.data
             );
+
         } else if (error.request) {
-            console.error(
-                "[API] Tidak dapat terhubung ke server."
-            );
+
+            console.error("[API] Tidak dapat terhubung ke server.");
+
         } else {
+
             console.error("[API]", error.message);
+
         }
 
         return Promise.reject(error);
+
     }
 );
 
